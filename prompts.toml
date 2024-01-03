@@ -1,0 +1,132 @@
+[gpt_summary_prompt_v2]
+prompt = """
+Analyze the contents from a git commit patch data and summarize the contents of the commit.
+If the commit involves more than 1 file, please summarize the contents of each file separately.
+Output format:
+<path of 1st file>\n
+<summary of 1st file> 
+<path of 2nd file>\n
+<summary of 2nd file>
+For example:
+For original path "articles/abc/def/ghi.md", the output should be:
+articles/abc/def/ghi.md \n\n(newline twice) This is a summary of the 1st file. \n\n
+"""
+
+[gpt_summary_prompt_v1.05]
+prompt = """
+Analyze the contents from a git commit patch data,and summarize the contents of the commit.
+If the commit involves more than 1 file, please summarize the contents of each file separately.
+Output format:
+<path of 1st file>\n
+<summary of 1st file> 
+<path of 2nd file>\n
+<summary of 2nd file>
+if has article link, please use the link.
+else if the path is contain with "windows-driver", remove ".md" from the path Replace "windows-driver-docs-pr" with "https://learn.microsoft.com/en-us/windows-hardware/drivers/" in the path of the file.
+else If the path is end with ".md", remove ".md" from the path Replace "article" with "https://learn.microsoft.com/en-us/azure/" in the path of the file.
+
+For example:
+For original path "articles/abc/def/ghi.md", the output should be:
+https://learn.microsoft.com/en-us/azure/abc/def/ghi.md \n\n(newline twice) This is a summary of the 1st file. \n\n
+"""
+
+[gpt_summary_prompt_v1]
+prompt = """
+Analyze the contents from a git commit patch data,and summarize the contents of the commit.
+If the commit involves more than 1 file, please summarize the contents of each file separately.
+Output format:
+<path of 1st file>\n
+<summary of 1st file> 
+<path of 2nd file>\n
+<summary of 2nd file>
+Replace "article" with "https://learn.microsoft.com/en-us/azure/" in the path of the file.
+If the path is end with ".md", remove ".md" from the path.
+For example:
+For original path "articles/abc/def/ghi.md", the output should be:
+https://learn.microsoft.com/en-us/azure/abc/def/ghi.md \n\n(newline twice) This is a summary of the 1st file. \n\n
+"""
+
+
+
+
+
+[gpt_title_prompt_v1]
+prompt = """
+Give me a title to summarize the input.
+"""
+
+[gpt_title_prompt_v2]
+prompt = """
+Provide a title that succinctly summarizes the input and generate a tag in the beginning. 
+Output format: "[tag] Title"
+Only generate 1 tag and 1 title. If there are multiple topics in the input, please choose the most important one.
+The tag should be the object type of the input.
+Here are some examples of tags: Model, Quota, Renaming, Image, Time, Region, New Feature, Text.
+You need to translate the tag into specified language if the input is not in English.
+"""
+
+[gpt_title_prompt_v3]
+prompt = """
+You are a Title generator bot.
+The input is a document change summary, which includes the link of the document and the summary of the change. The input may include change history for multiple links.
+You need to generate a title for the input. There should be 3 parts in the title. Output format: "0/1 [tag] Title"
+<1st part> Put 0 or 1 in the beginning of the title to indicate whether the change is an important change that need users to pay attention to.
+0 means not important: the change is a minor change, such as typo fix, grammar fix, metadata change, Hyperlink change, author change, etc. 
+Or the change is not parsable by the bot, such as binary file change or image change.
+1 means important.
+<2nd part> Generate a tag in the beginning of the title to indicate the object type of the input.
+The tag should be the object type of the input.
+Here are some examples of tags: Model, Quota, Time, Region, New Feature, Text, Limitation.
+<3rd part> Generate a title that succinctly summarizes the input.
+Only generate 1 tag and 1 title. If there are multiple topics in the input, please choose the most important one.
+
+You need to translate the tag into specified language if the input is not in English.
+Do not generate double quotes. Start from 0 or 1 directly.
+"""
+
+[gpt_similarity_prompt_v1]
+prompt = """
+The task is to analyze two sets of commit patch data. Evaluate the changes made in each patch, considering the files changed, lines of code added or deleted, and the intent of the changes. 
+Provide a binary output based on the analysis: '1' for similar patches and '0' for dissimilar patches. Additionally, explain the reasoning behind the given output, detailing why the patches are considered similar or dissimilar.  
+"""
+
+[gpt_weekly_summary_prompt_v1]
+prompt = """
+
+Summarize up to 10 Microsoft Learn document updates by level of importance, using numbered entries with title tags, titles, summaries, and links.
+Output format:
+1.[Title Tag] Title\n
+Update Summary\n
+Link \n\n (newline twice)
+2.[Title Tag] Title\n
+Update Summary\n
+Link \n\n (newline twice)
+"""
+
+[gpt_weekly_summary_prompt_v2]
+prompt = """
+Summarize up to 10 Microsoft Learn document updates by level of importance, using numbered entries with title tags, titles, summaries, and links. There should be no other text outside the list
+Output format:
+[
+    {
+        "type": "TextBlock",
+        "text": 1.[Title Tag] Title,
+        "size": "medium",
+        "weight": "bolder",
+        "color": "good"
+    },
+    {
+        "type": "TextBlock",
+        "text": Update Summary \nLink,
+        "wrap": True,
+        "color": "default"
+    },
+]
+"""
+
+[gpt_weekly_summary_prompt_v3]
+prompt = """
+Summarize up to 10 Microsoft Learn document updates by level of importance, using numbered entries with title tags, titles, summaries, and links. There should be no other text outside the list
+Output format:
+[1.[Title Tag] Title, Update Summary \nLink, "\n\n"(newline twice), 2.[Title Tag] Title, Update Summary \nLink, "\n\n"(newline twice)]
+"""
