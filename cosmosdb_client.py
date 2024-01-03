@@ -9,14 +9,10 @@ load_dotenv()
 
 class CosmosDBHandler:  
     def __init__(self):  
-        # self.database = os.getenv("AZURE_COSMOSDB_DATABASE")  
-        # self.account = os.getenv("AZURE_COSMOSDB_ACCOUNT")  
-        # self.container = os.getenv("AZURE_COSMOSDB_CONVERSATIONS_CONTAINER")  
-        # self.account_key = os.getenv("AZURE_COSMOSDB_ACCOUNT_KEY") 
-        self.database = "docupdateDB"
-        self.account ="jz-cosmosdb"
-        self.container = "docupdateContainer"
-        self.account_key = 'vS2v63TT8EpBnF5NtSwtDZA2vyyUSfwcohhlqcGLgFhhAM0zocggezw3vQP7OO9HdzxwpPgJESqRfoLZLxscnw==' 
+        self.database = os.getenv("AZURE_COSMOSDB_DATABASE")  
+        self.account = os.getenv("AZURE_COSMOSDB_ACCOUNT")  
+        self.container = os.getenv("AZURE_COSMOSDB_CONVERSATIONS_CONTAINER")  
+        self.account_key = os.getenv("AZURE_COSMOSDB_ACCOUNT_KEY") 
         
 
     def initialize_cosmos_client(self):  
